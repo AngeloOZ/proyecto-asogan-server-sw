@@ -3,6 +3,10 @@ import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
 import { PrismaClient, lotes } from '@prisma/client';
+
+import * as dotenv from 'dotenv';
+dotenv.config()
+
 import { configureConexionController, obtenerLotePorEvento, obtenerUltimaPuja } from './Controllers';
 import { UltimaPuja } from '../@types/UltimaPuja';
 
