@@ -116,3 +116,12 @@ model usuario {
   compradores    compradores?
   pujas          pujas[]
 }
+
+model notificaciones {
+  id          Int       @id @default(autoincrement())
+  fecha       DateTime? @db.DateTime(0)
+  titulo      String?   @db.VarChar(100)
+  descripcion String?   @db.VarChar(300)
+  uuid_evento String?   @db.VarChar(255)
+  estado      Int?      @db.TinyInt
+}
