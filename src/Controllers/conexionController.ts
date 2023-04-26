@@ -7,6 +7,6 @@ export function configureConexionController(socket: Socket) {
     
 
     socket.on('disconnect', () => {
-        console.log(`Socket disconnected: ${socket.id}`);
+        // console.log(`Socket disconnected: ${socket.id}`);
     });
 }

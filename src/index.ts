@@ -59,7 +59,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('obtenerUltimaPuja', async (idLote: number) => {
-
         const puja = await prisma.pujas.findFirst({
             where: {
                 id_lote: Number(idLote),
@@ -78,9 +77,9 @@ io.on('connection', (socket) => {
                 }
             ],
             take: 1,
-        });
+        });        
 
-        socket.emit('ultimaPuja', puja);
+        io.emit('ultimaPuja', puja);
 
     });
 
