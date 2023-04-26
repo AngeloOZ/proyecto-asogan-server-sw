@@ -5,7 +5,7 @@ function configureConexionController(socket) {
     // console.log(`Socket connected: ${socket.id}`);
     // socket.emit('connection', 'Hola mundo desde el server');
     socket.on('disconnect', () => {
-        console.log(`Socket disconnected: ${socket.id}`);
+        // console.log(`Socket disconnected: ${socket.id}`);
     });
 }
 exports.configureConexionController = configureConexionController;

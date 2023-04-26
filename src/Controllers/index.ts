@@ -1,2 +1,3 @@
 export * from './conexionController';
-export * from './informacionMonitorController';
+export * from './pujasController';
+export * from './loteController';

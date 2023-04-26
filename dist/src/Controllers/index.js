@@ -15,4 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./conexionController"), exports);
-__exportStar(require("./informacionMonitorController"), exports);
+__exportStar(require("./pujasController"), exports);
+__exportStar(require("./loteController"), exports);
