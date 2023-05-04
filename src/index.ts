@@ -6,7 +6,7 @@ import http from 'http';
 import * as dotenv from 'dotenv';
 dotenv.config()
 
-import { configureConexionController, mejoresPujas, obtenerLoteActivo, ultimaPuja } from './Controllers';
+import { configureConexionController, listadoPujas, mejoresPujas, obtenerLoteActivo, ultimaPuja } from './Controllers';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -38,6 +38,8 @@ io.on('connection', (socket) => {
     ultimaPuja(socket, io);
 
     mejoresPujas(socket, io);
+
+    listadoPujas(socket, io);
 
 });
 

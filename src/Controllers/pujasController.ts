@@ -42,7 +42,6 @@ export function ultimaPuja(socket: Socket, io: Server) {
 
 export function mejoresPujas(socket: Socket, io: Server) {
     socket.on('mejoresPujas', async (idLote: number) => {
-        ;
 
         const mejoresPujas = await prisma.pujas.findMany({
             where: {
@@ -66,5 +65,31 @@ export function mejoresPujas(socket: Socket, io: Server) {
         });
 
         io.emit('mejoresPujas', mejoresPujas);
+    });
+}
+
+export function listadoPujas(socket: Socket, io: Server) {
+    
+    socket.on('listadoPujas', async (idLote: number) => {
+        
+        const mejoresPujas = await prisma.pujas.findMany({
+            where: {
+                id_lote: Number(idLote),
+
+            },
+            orderBy: [
+                {
+                    puja: 'asc',
+                },
+                {
+                    id_puja: 'asc',
+                }
+            ],
+        });
+
+        console.log(mejoresPujas.length);
+                
+
+        io.emit('listadoPujas', mejoresPujas);
     });
 }
