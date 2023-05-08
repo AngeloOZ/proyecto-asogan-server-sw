@@ -1,6 +1,7 @@
 import { Server, Socket } from "socket.io";
 
 let broadcaster
+
 export function transmisionVideo(socket: Socket, io: Server) {
 
     socket.on("broadcaster", () => {

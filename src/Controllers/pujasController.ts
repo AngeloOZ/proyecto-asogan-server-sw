@@ -87,9 +87,6 @@ export function listadoPujas(socket: Socket, io: Server) {
             ],
         });
 
-        console.log(mejoresPujas.length);
-                
-
         io.emit('listadoPujas', mejoresPujas);
     });
 }
