@@ -6,7 +6,7 @@ import http from 'http';
 import * as dotenv from 'dotenv';
 dotenv.config()
 
-import { configureConexionController, listadoPujas, mejoresPujas, obtenerLoteActivo, ultimaPuja } from './Controllers';
+import { configureConexionController, listadoPujas, mejoresPujas, obtenerLoteActivo, ultimaPuja,transmisionVideo } from './Controllers';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -29,7 +29,9 @@ app.get('/', (req: Request, res: Response) => {
 app.get('/status', (req: Request, res: Response) => {
     res.status(200).send('OK');
 });
+let broadcaster
 
+io.sockets.on("error", e => console.log(e));
 io.on('connection', (socket) => {
     configureConexionController(socket);
 
@@ -41,6 +43,8 @@ io.on('connection', (socket) => {
 
     listadoPujas(socket, io);
 
+    transmisionVideo(socket, io);
+    
 });
 
 
