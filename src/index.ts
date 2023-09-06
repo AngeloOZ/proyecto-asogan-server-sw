@@ -34,7 +34,7 @@ if (turnServerEnabled && turnServerUrl && turnServerUsername && turnServerCreden
 }
 
 const app = express();
-const server = protocol === 'http' ? http.createServer(app) : https.createServer(app);
+const server = http.createServer(app);
 const io = new Server(server, {
     allowUpgrades: true,
     transports: ["polling", "websocket"],
