@@ -4,6 +4,7 @@ import { Server } from 'socket.io';
 import compression from 'compression';
 import cors from 'cors';
 import http from 'http';
+import https from 'https';
 dotenv.config();
 
 import { RTCPeerController, configureConexionController, listadoPujas, mejoresPujas, obtenerLoteActivo, ultimaPuja } from './Controllers';
@@ -14,6 +15,7 @@ import { Viewers } from '../@types';
 let iceServers = [];
 let broadcasters: Broadcasters = {};
 let viewers: Viewers = {};
+const protocol = process.env.PROTOCOL || 'http';
 const PORT = process.env.PORT || 4000;
 
 const stunServerUrl = process.env.STUN_SERVER_URL;
@@ -32,7 +34,7 @@ if (turnServerEnabled && turnServerUrl && turnServerUsername && turnServerCreden
 }
 
 const app = express();
-const server = http.createServer(app);
+const server = protocol === 'http' ? http.createServer(app) : https.createServer(app);
 const io = new Server(server, {
     allowUpgrades: true,
     transports: ["polling", "websocket"],
