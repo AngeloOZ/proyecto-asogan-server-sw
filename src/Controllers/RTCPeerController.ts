@@ -61,7 +61,7 @@ function handleDisconnect({ socket, viewers, broadcasters, reason }: IHandleDisc
                 const viewer = viewers[key];
                 if (viewer.broadcastID == broadcastID) {
                     socket
-                        .to(broadcasters[viewers[key]['broadcastID']])
+                        .to(broadcastID)
                         .emit('disconnectPeer', key, viewers[key]['username']);
                     delete viewers[key];
                 }
