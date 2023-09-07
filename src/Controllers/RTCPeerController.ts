@@ -39,7 +39,7 @@ function handleViewer({ socket, broadcasters, viewers, broadcastID, iceServers, 
     viewers[socket.id]['username'] = username;
     // From Viewers socket emit to specified broadcaster.id
 
-    console.log(`Viewer connected to ${broadcastID} and his id is ${socket.id} and his username is ${username}`);
+    // console.log(`Viewer connected to ${broadcastID} and his id is ${socket.id} and his username is ${username}`);
     socket.to(broadcasters[broadcastID]).emit('viewer', socket.id, iceServers, username);
 }
 
@@ -56,24 +56,17 @@ function handleDisconnect({ socket, viewers, broadcasters, reason }: IHandleDisc
     for (let broadcastID in broadcasters) {
         if (broadcasters[broadcastID] == socket.id) {
             delete broadcasters[broadcastID];
-
-            for (const key in viewers) {
-                const viewer = viewers[key];
-                if (viewer.broadcastID == broadcastID) {
-                    socket
-                        .to(broadcastID)
-                        .emit('disconnectPeer', key, viewers[key]['username']);
-                    delete viewers[key];
-                }
-            }
-            sendToBroadcasterViewers({ socket, broadcastID, message: 'broadcasterDisconnect', viewers });
+            sendToBroadcasterViewers({ socket, broadcastID, message: 'broadcasterDisconnect', viewers });            
         }
     }
 }
 
 function sendToBroadcasterViewers({ socket, broadcastID, message, viewers }: ISendToBroadcasterViewers) {
-    // From Broadcaster socket emit to all viewers connected to a specified broadcaster.id
     for (let id in viewers) {
-        if (viewers[id]['broadcastID'] == broadcastID) socket.to(id).emit(message);
+        const viewer = viewers[id];
+        if (viewer['broadcastID'] == broadcastID){
+            socket.to(id).emit(message);
+            delete viewers[id];
+        } 
     }
 }
